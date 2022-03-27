@@ -36,8 +36,8 @@ if __name__ == "__main__":
     config = toml.loads(f.read())
     f.close()
 
-    # This is probably localhost
-    client = InfluxDBClient(host="192.168.1.101", port=8086)
+    # TODO: handle this better too, what if can't connect? 
+    client = InfluxDBClient(host=config["influx_host"], port=config["influx_port"])
 
     print(client.get_list_database())
 
@@ -50,9 +50,9 @@ if __name__ == "__main__":
     time.sleep(5)
 
     # Get battery voltage
-    _thread.start_new_thread(http_battery_voltage, (client,))
+    _thread.start_new_thread(http_battery_voltage, (client, config["BATTERY_VOLTAGE_SENSOR_WEBSERVER"]))
 
-    # Shut everything off if voltage gets far too low
+    # 'Force' shut everything off if voltage gets far too low
     _thread.start_new_thread(force_disable_solar_devices, (client, config))
 
     # Enable devices when we have excess solar

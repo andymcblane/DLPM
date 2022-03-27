@@ -10,12 +10,11 @@ from queries import (
     get_device_enabled,
 )
 
-VOLTAGE_SENSOR_IP = "http://192.168.1.103"
 
 
 # Arduino is attached to the battery, which publishes the current voltage on
 # an HTTP server :80. Grab it and push to influx.
-def http_battery_voltage(client):
+def http_battery_voltage(client, VOLTAGE_SENSOR_IP):
     while True:
         try:
             resp = requests.get(VOLTAGE_SENSOR_IP, timeout=10)
@@ -23,7 +22,7 @@ def http_battery_voltage(client):
             json_body = [
                 {
                     "measurement": "battery_voltage",
-                    "tags": {"host": "david"},
+                    "tags": {"host": "default"},
                     "fields": {"voltage": voltage},
                 }
             ]

@@ -1,4 +1,11 @@
 
+# InfluxDB settings
+influx_host = "localhost"
+influx_port = 8086
+
+# Battery voltage Arduino webserver
+BATTERY_VOLTAGE_SENSOR_WEBSERVER = "http://192.168.1.103"
+
 # Max state of charge in BMS is 4.05V per cell * 16 = 56.7V.
 # Excess Solar voltage - when to start turning devices on 
 excess_solar_threshold = "56.4"

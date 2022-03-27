@@ -1,0 +1,29 @@
+
+# Max state of charge in BMS is 4.05V per cell * 16 = 56.7V.
+# Excess Solar voltage - when to start turning devices on 
+excess_solar_threshold = "56.4"
+
+# So once we have hit 'excess_solar_threshold', do not turn devices off until this threshold
+# We use this to potentially combat an issue with clouding, voltage sag, and MPT7210 MPPT tracking
+excess_solar_cutoff = "56.0"
+
+# Disregards the minimum_enabled_seconds flag, turn all items off. 
+force_disable_solar_devices = "50.0" # 3.57V
+
+# When we have no more devices to enable, log so we can track
+log_when_excess_solar = true
+
+[devices]
+    [devices.pump]
+    minimum_enabled_seconds = 60
+
+    [devices.water_heater]
+    minimum_enabled_seconds = 600
+
+    [devices.air_con]
+    # If it's worth running AC, do it for at least an hour. 
+    minimum_enabled_seconds = 3600
+
+    [devices.crypto]
+    minimum_enabled_seconds = 3600
+

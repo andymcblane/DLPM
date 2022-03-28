@@ -63,4 +63,4 @@ if __name__ == "__main__":
 
     # Start webserver, devices will hit their endpoint (e.g pump) to see if they should run.
     # This way all logic is controlled here, requring less in-field device flashes.
-    app.run(debug=False)
+    app.run(debug=False, host="0.0.0.0")

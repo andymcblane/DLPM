@@ -1,6 +1,6 @@
 
 # InfluxDB settings
-influx_host = "localhost"
+influx_host = "http://localhost"
 influx_port = 8086
 
 # Battery voltage Arduino webserver
